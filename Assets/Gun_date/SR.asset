@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b978186a921852848b82be10b4e9d2e3, type: 3}
+  m_Name: SR
+  m_EditorClassIdentifier: 
+  Shootpower: 3000
+  ct: 0.6
+  Max_magazine: 5
+  relod_time: 1
+  taka_time: 1.3
+  Damage: 5
+  pellet: 1
+  diffusion: 0
+  Gun_Object: {fileID: 8105093614528831879, guid: ea96cf43fa5d15147921a167ed9e68f7, type: 3}
+  startpoint: {fileID: 0}
+  MFsize: {x: 1, y: 1, z: 1}
+  Gun_animator: {fileID: 0}

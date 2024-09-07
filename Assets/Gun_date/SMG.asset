@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b978186a921852848b82be10b4e9d2e3, type: 3}
+  m_Name: SMG
+  m_EditorClassIdentifier: 
+  Shootpower: 1000
+  ct: 0.02
+  Max_magazine: 20
+  relod_time: 0.3
+  taka_time: 1
+  Damage: 1
+  pellet: 1
+  diffusion: 1
+  Gun_Object: {fileID: 954277450596161486, guid: 23bf6ec2ea670874eaf412bd4e6d0f0f, type: 3}
+  startpoint: {fileID: 0}
+  MFsize: {x: 0.5, y: 0.5, z: 0.5}
+  Gun_animator: {fileID: 0}
