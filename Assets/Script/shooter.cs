@@ -42,6 +42,10 @@ public class shooter : MonoBehaviour
     GameObject MF;
     [SerializeField]
     GameObject MFPB;
+    [SerializeField]
+    Transform point;//ÉGÉCÉÄÇå¸ÇØÇÈêÊ
+    [SerializeField]
+    bool Ikact = false;
 
 
     void Start()
@@ -176,11 +180,16 @@ public class shooter : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             gundata[Gun_Num].Gun_animator.SetTrigger("AIM");
+            Ikact = true;
+           
         }
         else if (Input.GetMouseButtonUp(1))
         {
-            //gundata[Gun_Num].Gun_animator.SetTrigger("BACK AIM");
+            gundata[Gun_Num].Gun_animator.SetTrigger("BACK AIM");
+            Ikact = false;
+           
         }
+
         /*if (Gun_Num == 0)
         {
             if (Input.GetMouseButtonDown(1))
@@ -237,6 +246,29 @@ public class shooter : MonoBehaviour
             take = true;
             take_ct = Time.time + gundata[4].DG.taka_time;
             Gun_Num = 4;
+        }
+    }
+    private void OnAnimatorIK(int layerIndex)
+    {
+        if (Ikact)
+        {
+            gundata[Gun_Num].Gun_animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+            gundata[Gun_Num].Gun_animator.SetIKPosition(AvatarIKGoal.RightHand, point.position);
+            gundata[Gun_Num].Gun_animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+            gundata[Gun_Num].Gun_animator.SetIKRotation(AvatarIKGoal.RightHand, point.rotation);
+
+            gundata[Gun_Num].Gun_animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+            gundata[Gun_Num].Gun_animator.SetIKPosition(AvatarIKGoal.LeftHand, point.position);
+            gundata[Gun_Num].Gun_animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+            gundata[Gun_Num].Gun_animator.SetIKRotation(AvatarIKGoal.LeftHand, point.rotation);
+        }
+        else
+        {
+            gundata[Gun_Num].Gun_animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+            gundata[Gun_Num].Gun_animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
+
+            gundata[Gun_Num].Gun_animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
+            gundata[Gun_Num].Gun_animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
         }
     }
 }

@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     Vector3 MinRange;
     [SerializeField]
     int damage;
+    [SerializeField]
+    float speed;
     private void OnCollisionEnter(Collision collision)
     {
         damage = gun.Getgundamage();
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour
             spawmpos = new Vector3(x, y, z);
             Instantiate(Enemyprefab, spawmpos, Quaternion.identity);
             Destroy(gameObject);
-        } 
+        }
+        transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
     }
 }

@@ -110,8 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43cbbfda17fd59a47be94a2e4c4f8d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gun: {fileID: 0}
   MaxHP: 5
   HP: 5
   Enemyprefab: {fileID: 5317424754934912295}
   MaxRange: {x: 25, y: 3, z: 25}
   MinRange: {x: -25, y: 1, z: -25}
+  damage: 0
+  speed: 0.01

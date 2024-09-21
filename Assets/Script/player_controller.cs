@@ -26,7 +26,8 @@ public class player_controller : MonoBehaviour
     float DS_SP;
     [SerializeField]
     Animator Anime;
-
+    [SerializeField]
+    bool testmood = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -40,7 +41,11 @@ public class player_controller : MonoBehaviour
     void Update()
     {
         Move();
-        Cam_Controle();
+        if (!testmood)
+        {
+            Cam_Controle();
+        }
+        
         Jump();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -58,7 +63,10 @@ public class player_controller : MonoBehaviour
         {
             Reset();
         }
-
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            testmood = !testmood;
+        }
     }
     
 
@@ -112,9 +120,9 @@ void Move()
         float mousey = Input.GetAxis("Mouse Y") * Cam_sensitivity; 
 
         transform.rotation *= Quaternion.Euler(0, mousex, 0);
-        if((transform.rotation*Quaternion.Euler(-mousey, 0, 0)).eulerAngles.x<60|| (transform.rotation * Quaternion.Euler(-mousey, 0, 0)).eulerAngles.x>300)
+        if((Cam_transfrom.rotation*Quaternion.Euler(-mousey, 0, 0)).eulerAngles.x<60|| (Cam_transfrom.rotation * Quaternion.Euler(-mousey, 0, 0)).eulerAngles.x>300)
         {
-            transform.rotation *= Quaternion.Euler(-mousey, mousex, 0);
+            Cam_transfrom.rotation *= Quaternion.Euler(-mousey, 0,0 );
         }
     }
 
