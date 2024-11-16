@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,19 +12,23 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     int HP;
     [SerializeField]
-    GameObject Enemyprefab;
-    Vector3 spawmpos;
-    [SerializeField]
-    Vector3 MaxRange;
-    [SerializeField]
-    Vector3 MinRange;
-    [SerializeField]
-    int damage;
+    public float KBpower;
+
+
+
+
     [SerializeField]
     float speed;
+    GameObject Gamemanager;
+    EnemyGeneraeor EG;
+    Score score;
+    
+    NavMeshAgent Agent;
+    
+    Transform player;
     private void OnCollisionEnter(Collision collision)
     {
-        damage = gun.Getgundamage();
+        
         if (collision.gameObject.CompareTag("Buliet"))
         {
             HP-=gun.Getgundamage();
@@ -33,6 +38,12 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         gun = FindObjectOfType<shooter>();
+        Gamemanager = GameObject.FindWithTag("GameController");
+        score = Gamemanager.GetComponent<Score>();
+        EG = Gamemanager.GetComponent<EnemyGeneraeor>();
+        player = GameObject.FindWithTag("player").transform;
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.SetDestination(player.position);
     }
 
     // Update is called once per frame
@@ -40,15 +51,13 @@ public class Enemy : MonoBehaviour
     {
         if (HP <= 0) 
         {
-            
-            float x = Random.Range(MinRange.x, MaxRange.x);
-            float y = Random.Range(MinRange.y, MaxRange.y);
-            float z = Random.Range(MinRange.z, MaxRange.z);
-            HP = MaxHP;
-            spawmpos = new Vector3(x, y, z);
-            Instantiate(Enemyprefab, spawmpos, Quaternion.identity);
+
+            EG.Enemyspawn();
+            score.Plusscore(1);
             Destroy(gameObject);
+            
         }
-        transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
+        Agent.SetDestination(player.position);
+        // transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
     }
 }

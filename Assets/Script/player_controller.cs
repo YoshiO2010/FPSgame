@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player_controller : MonoBehaviour
 {
@@ -28,6 +29,16 @@ public class player_controller : MonoBehaviour
     Animator Anime;
     [SerializeField]
     bool testmood = false;
+    [SerializeField]
+    float PlayerHP;
+    [SerializeField]
+    float Max_PlayerHP;
+    [SerializeField]
+    Text HPtext;
+    [SerializeField]
+    Text Max_HPtext;
+    [SerializeField]
+    float KBP;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,6 +46,7 @@ public class player_controller : MonoBehaviour
         reset = this.transform.position;
         Cam_transfrom.rotation = Quaternion.identity;
         Anime = GetComponent<Animator>();
+        Max_HPtext.text = Max_PlayerHP.ToString();
     }
 
     // Update is called once per frame
@@ -67,6 +79,8 @@ public class player_controller : MonoBehaviour
         {
             testmood = !testmood;
         }
+        HPtext.text = PlayerHP.ToString();
+       
     }
     
 
@@ -144,8 +158,18 @@ void Move()
     {
         
         jump_count = 0;
-        reset = transform.position; 
-        
+        reset = transform.position;
+        if (collision.transform.tag == "Enemy")
+        {
+            PlayerHP -= 10;
+            rb.velocity = Vector3.zero;
+            Vector3 distination = (collision.transform.position - transform.position).normalized;
+            KBP = collision.gameObject.GetComponent<Enemy>().KBpower;
+            Debug.Log(distination);
+            rb.AddForce(collision.gameObject.transform.forward, ForceMode.VelocityChange);
+           
+            //rb.velocity = new Vector3(distination.x * KBP, 10, distination.z * KBP);
+        }
     }
     private void Reset()
     {

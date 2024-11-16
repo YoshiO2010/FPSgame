@@ -46,6 +46,11 @@ public class shooter : MonoBehaviour
     Transform point;//ÉGÉCÉÄÇå¸ÇØÇÈêÊ
     [SerializeField]
     bool Ikact = false;
+    [SerializeField]
+    List<GameObject> Gun_objlist;
+    [SerializeField]
+    List<Transform> Gun_pointlist;
+    GameObject GunObject;
 
 
     void Start()
@@ -65,6 +70,8 @@ public class shooter : MonoBehaviour
             relod_zumi[i].gameObject.SetActive(false);
         }
         Max_magazine_Text.text = gundata[Gun_Num].DG.Max_magazine.ToString();
+        GunObject = Gun_objlist[Gun_Num];
+        point = Gun_pointlist[Gun_Num];
     }
 
     // Update is called once per frame
@@ -107,6 +114,7 @@ public class shooter : MonoBehaviour
                     MF.transform.SetParent(gundata[Gun_Num].startpoint);
                     MF.transform.localScale = gundata[Gun_Num].DG.MFsize;
                 }
+                MF.GetComponent<ParticleSystem>().Play();
             }
            
            
@@ -115,8 +123,8 @@ public class shooter : MonoBehaviour
         {
             if (MF != null)
             {
-                MF.SetActive(false);
-                MF = null;
+                //MF.SetActive(false);
+               // MF = null;
             }
         }
         if (Input.GetKeyDown(KeyCode.R))
@@ -247,6 +255,10 @@ public class shooter : MonoBehaviour
             take_ct = Time.time + gundata[4].DG.taka_time;
             Gun_Num = 4;
         }
+        GunObject.SetActive(false);
+        GunObject = Gun_objlist[Gun_Num];
+        GunObject.SetActive(true);
+        point = Gun_pointlist[Gun_Num];
     }
     private void OnAnimatorIK(int layerIndex)
     {
