@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5317424754934912295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7526367149059380330}
@@ -115,7 +115,7 @@ MonoBehaviour:
   gun: {fileID: 0}
   MaxHP: 5
   HP: 5
-  KBpower: 2000000
+  KBpower: 50
   speed: 0.01
 --- !u!195 &6775238928394128685
 NavMeshAgent:

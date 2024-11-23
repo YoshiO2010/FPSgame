@@ -9,7 +9,7 @@ public class EnemyGeneraeor : MonoBehaviour
     [SerializeField]
     float MinRange;
     [SerializeField]
-    GameObject Enemyprefab;
+    GameObject[] Enemyprefab;
     Transform player;
     [SerializeField]
     Vector3 MaxLimit;
@@ -37,7 +37,8 @@ public class EnemyGeneraeor : MonoBehaviour
         float z =Mathf.Clamp( R * Mathf.Sin(Rad)+playerpos.z,MinLimit.z,MaxLimit.z);
         Vector3 spawmpos;
         spawmpos = new Vector3(x, y, z);
-        Instantiate(Enemyprefab, spawmpos, Quaternion.identity);
+        int ramdom = Random.Range(0, Enemyprefab.Length);
+        Instantiate(Enemyprefab[ramdom], spawmpos, Quaternion.identity);
        
        
     }

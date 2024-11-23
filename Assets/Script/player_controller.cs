@@ -39,8 +39,10 @@ public class player_controller : MonoBehaviour
     Text Max_HPtext;
     [SerializeField]
     float KBP;
+    bool KB_Flag;
     void Start()
     {
+        KB_Flag = false;
         rb = GetComponent<Rigidbody>();
         //MAXjump_count = 2;
         reset = this.transform.position;
@@ -124,8 +126,12 @@ void Move()
         }
 
         //Vector3 vec = new Vector3(x, 0, z) * move_speed;
-        Vector3 vec = (transform.forward * z + transform.right * x)*move_speed; 
-        rb.velocity = new Vector3(vec.x, rb.velocity.y, vec.z);
+        Vector3 vec = (transform.forward * z + transform.right * x)*move_speed;
+        if (!KB_Flag)
+        {
+            //rb.velocity = new Vector3(vec.x, rb.velocity.y, vec.z);
+        }
+       
     }
 
     void Cam_Controle()
@@ -163,14 +169,26 @@ void Move()
         {
             PlayerHP -= 10;
             rb.velocity = Vector3.zero;
-            Vector3 distination = (collision.transform.position - transform.position).normalized;
             KBP = collision.gameObject.GetComponent<Enemy>().KBpower;
+            Vector3 distination = (collision.transform.position - transform.position);
+            Vector3 dis = new Vector3(distination.x, 0, distination.z).normalized * KBP;
+
             Debug.Log(distination);
-            rb.AddForce(collision.gameObject.transform.forward, ForceMode.VelocityChange);
-           
-            //rb.velocity = new Vector3(distination.x * KBP, 10, distination.z * KBP);
+            rb.AddForce(distination * KBP, ForceMode.VelocityChange);
         }
-    }
+            /*if (collision.transform.tag == "Enemy")
+            {
+                PlayerHP -= 10;
+                rb.velocity = Vector3.zero;
+                Vector3 destination = (collision.transform.position - transform.position);
+                KBP = collision.gameObject.GetComponent<Enemy>().KBpower;
+                Vector3 dest = new Vector3(destination.x, 0, destination.z).normalized * KBP;
+                Debug.Log(destination);
+                rb.AddForce(destination*KBP, ForceMode.VelocityChange);
+                KB_Flag = true;
+                //rb.velocity = new Vector3(distination.x * KBP, 10, distination.z * KBP);
+            }*/
+        }
     private void Reset()
     {
         this.transform.position = reset;
