@@ -34,8 +34,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2077663025396942354}
   - {fileID: 707757288812367465}
+  - {fileID: 2077663025396942354}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -134,7 +134,8 @@ MonoBehaviour:
   MaxHP: 10
   HP: 10
   KBpower: 50
-  speed: 0.005
+  speed: 0.01
+  search: {fileID: 0}
 --- !u!195 &5055948688652674037
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5055948688652674035}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8998834948303605520
 MeshFilter:
@@ -268,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   search_angle: 90
+  found_flag: 0
 --- !u!1001 &2077663025396554898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,7 +283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cc633396b5f95da4b916357a5508ee4f, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cc633396b5f95da4b916357a5508ee4f, type: 3}
       propertyPath: m_LocalScale.x

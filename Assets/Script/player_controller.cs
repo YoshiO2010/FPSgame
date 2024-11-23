@@ -129,7 +129,7 @@ void Move()
         Vector3 vec = (transform.forward * z + transform.right * x)*move_speed;
         if (!KB_Flag)
         {
-            //rb.velocity = new Vector3(vec.x, rb.velocity.y, vec.z);
+            rb.velocity = new Vector3(vec.x, rb.velocity.y, vec.z);
         }
        
     }

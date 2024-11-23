@@ -19,6 +19,9 @@ public class Enemy2 : MonoBehaviour
     Score score;
     NavMeshAgent Agent;
     Transform player;
+    [SerializeField]
+    search_Script search;
+    Rigidbody rb;
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -30,13 +33,15 @@ public class Enemy2 : MonoBehaviour
     }
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         gun = FindObjectOfType<shooter>();
         Gamemanager = GameObject.FindWithTag("GameController");
         score = Gamemanager.GetComponent<Score>();
         EG = Gamemanager.GetComponent<EnemyGeneraeor>();
         player = GameObject.FindWithTag("player").transform;
         Agent = GetComponent<NavMeshAgent>();
-        Agent.SetDestination(player.position);
+        //Agent.SetDestination(player.position);
+        search = transform.GetChild(0).gameObject.GetComponent<search_Script>();
     }
 
     // Update is called once per frame
@@ -50,9 +55,19 @@ public class Enemy2 : MonoBehaviour
             Destroy(gameObject);
 
         }
-        Agent.SetDestination(player.position);
+        if (search.found_flag == true)
+        {
+            //Agent.SetDestination(player.position);
+            coroutine();
+        }
+        
         // transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
     }
     // Start is called before the first frame update
-  
+  IEnumerator coroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        rb.AddForce(Vector3.up);
+        yield return new WaitForSeconds(0.5f);
+    }
 }
