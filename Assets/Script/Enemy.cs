@@ -34,6 +34,17 @@ public class Enemy : MonoBehaviour
             HP-=gun.Getgundamage();
             Destroy(collision.gameObject);
         }
+        if(collision.gameObject.CompareTag("player"))
+        {
+            // NavMeshAgentを一時停止
+            Agent.isStopped = true;
+
+            //アニメーション入れるならここに
+
+
+            // NavMeshAgentを再開
+            StartCoroutine(ResumeNavMesh());
+        }
     }
     void Start()
     {
@@ -59,5 +70,13 @@ public class Enemy : MonoBehaviour
         }
         Agent.SetDestination(player.position);
         // transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
+    }
+    private IEnumerator ResumeNavMesh()
+    {
+        yield return new WaitForSeconds(1.0f); // ジャンプ後に1秒待機
+        if (Agent != null)
+        {
+            Agent.isStopped = false; // NavMeshAgentを再開
+        }
     }
 }

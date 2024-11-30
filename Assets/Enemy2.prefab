@@ -133,7 +133,7 @@ MonoBehaviour:
   gun: {fileID: 0}
   MaxHP: 10
   HP: 10
-  KBpower: 50
+  KBpower: 5
   speed: 0.01
   search: {fileID: 0}
 --- !u!195 &5055948688652674037

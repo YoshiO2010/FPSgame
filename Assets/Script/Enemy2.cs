@@ -57,17 +57,25 @@ public class Enemy2 : MonoBehaviour
         }
         if (search.found_flag == true)
         {
-            //Agent.SetDestination(player.position);
-            coroutine();
+            StartCoroutine(JumpForward()); // 前方にジャンプ
         }
-        
+
         // transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
     }
-    // Start is called before the first frame update
-  IEnumerator coroutine()
+    private IEnumerator JumpForward()
     {
-        yield return new WaitForSeconds(0.5f);
-        rb.AddForce(Vector3.up);
-        yield return new WaitForSeconds(0.5f);
+        if (rb != null)
+        {
+            // 前方（プレイヤー方向）にジャンプ
+            Vector3 direction = (player.position - transform.position).normalized; // プレイヤー方向の正規化ベクトル
+            direction.y = 0.5f; // 上方向の成分を加える
+            //rb.AddForce(direction * KBpower, ForceMode.Impulse);
+
+            rb.velocity = direction;
+
+            //search.found_flag = false;
+
+            yield return new WaitForSeconds(5.0f); // ジャンプ後に待機
+        }
     }
 }

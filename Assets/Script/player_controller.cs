@@ -127,23 +127,31 @@ void Move()
 
         //Vector3 vec = new Vector3(x, 0, z) * move_speed;
         Vector3 vec = (transform.forward * z + transform.right * x)*move_speed;
-        if (!KB_Flag)
-        {
-            rb.velocity = new Vector3(vec.x, rb.velocity.y, vec.z);
-        }
+
        
     }
 
     void Cam_Controle()
     {
         float mousex = Input.GetAxis("Mouse X") * Cam_sensitivity;
-        float mousey = Input.GetAxis("Mouse Y") * Cam_sensitivity; 
+        float mousey = Input.GetAxis("Mouse Y") * Cam_sensitivity;
 
-        transform.rotation *= Quaternion.Euler(0, mousex, 0);
-        if((Cam_transfrom.rotation*Quaternion.Euler(-mousey, 0, 0)).eulerAngles.x<60|| (Cam_transfrom.rotation * Quaternion.Euler(-mousey, 0, 0)).eulerAngles.x>300)
-        {
-            Cam_transfrom.rotation *= Quaternion.Euler(-mousey, 0,0 );
-        }
+        // プレイヤーの回転を Rigidbody 経由で行う
+        Quaternion deltaRotation = Quaternion.Euler(0, mousex, 0);
+        rb.MoveRotation(rb.rotation * deltaRotation);
+
+        // カメラの回転を制限付きで調整
+        float newRotationX = Cam_transfrom.localEulerAngles.x - mousey;
+        if (newRotationX > 180) newRotationX -= 360; // 回転角度を -180 ~ 180 に制限
+        newRotationX = Mathf.Clamp(newRotationX, -60, 60);
+
+        Cam_transfrom.localEulerAngles = new Vector3(newRotationX, 0, 0);
+
+        //transform.rotation *= Quaternion.Euler(0, mousex, 0);
+        //if((Cam_transfrom.rotation*Quaternion.Euler(-mousey, 0, 0)).eulerAngles.x<60|| (Cam_transfrom.rotation * Quaternion.Euler(-mousey, 0, 0)).eulerAngles.x>300)
+        //{
+        //    Cam_transfrom.rotation *= Quaternion.Euler(-mousey, 0,0 );
+        //}
     }
 
     void Jump()
@@ -162,33 +170,29 @@ void Move()
     }
     void OnCollisionEnter(Collision collision)
     {
-        
-        jump_count = 0;
-        reset = transform.position;
-        if (collision.transform.tag == "Enemy")
+        Debug.Log(collision.transform.tag);
+
+        if (collision.transform.CompareTag("Enemy"))
         {
             PlayerHP -= 10;
-            rb.velocity = Vector3.zero;
-            KBP = collision.gameObject.GetComponent<Enemy>().KBpower;
-            Vector3 distination = (collision.transform.position - transform.position);
-            Vector3 dis = new Vector3(distination.x, 0, distination.z).normalized * KBP;
 
-            Debug.Log(distination);
-            rb.AddForce(distination * KBP, ForceMode.VelocityChange);
+            // ノックバック処理
+            Vector3 Direction = (transform.position - collision.transform.position).normalized;
+            Vector3 knockbackDirection = new Vector3(Direction.x,1, Direction.z).normalized;
+            float knockbackPower = collision.gameObject.GetComponent<Enemy>().KBpower;
+
+            rb.velocity = Vector3.zero; // 現在の速度をリセット
+            rb.AddForce(knockbackDirection * knockbackPower, ForceMode.VelocityChange);
+            KB_Flag = true;
         }
-            /*if (collision.transform.tag == "Enemy")
-            {
-                PlayerHP -= 10;
-                rb.velocity = Vector3.zero;
-                Vector3 destination = (collision.transform.position - transform.position);
-                KBP = collision.gameObject.GetComponent<Enemy>().KBpower;
-                Vector3 dest = new Vector3(destination.x, 0, destination.z).normalized * KBP;
-                Debug.Log(destination);
-                rb.AddForce(destination*KBP, ForceMode.VelocityChange);
-                KB_Flag = true;
-                //rb.velocity = new Vector3(distination.x * KBP, 10, distination.z * KBP);
-            }*/
-        }
+
+        // ジャンプカウントのリセット
+        jump_count = 0;
+
+        // リセット位置の更新
+        reset = transform.position;
+    }
+
     private void Reset()
     {
         this.transform.position = reset;
