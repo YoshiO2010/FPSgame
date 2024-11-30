@@ -77,6 +77,7 @@ public class Enemy : MonoBehaviour
         if (Agent != null)
         {
             Agent.isStopped = false; // NavMeshAgent‚ğÄŠJ
+            player.gameObject.GetComponent<player_controller>().KB_Flag = false;
         }
     }
 }

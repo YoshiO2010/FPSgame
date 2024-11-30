@@ -39,7 +39,7 @@ public class player_controller : MonoBehaviour
     Text Max_HPtext;
     [SerializeField]
     float KBP;
-    bool KB_Flag;
+    public bool KB_Flag;
     void Start()
     {
         KB_Flag = false;
@@ -127,7 +127,11 @@ void Move()
 
         //Vector3 vec = new Vector3(x, 0, z) * move_speed;
         Vector3 vec = (transform.forward * z + transform.right * x)*move_speed;
-
+        if (KB_Flag == false)
+        {
+            rb.velocity = new Vector3(vec.x, rb.velocity.y, vec.z);
+        }
+        
        
     }
 
@@ -175,7 +179,7 @@ void Move()
         if (collision.transform.CompareTag("Enemy"))
         {
             PlayerHP -= 10;
-
+            KB_Flag = true;
             // ノックバック処理
             Vector3 Direction = (transform.position - collision.transform.position).normalized;
             Vector3 knockbackDirection = new Vector3(Direction.x,1, Direction.z).normalized;
@@ -183,7 +187,7 @@ void Move()
 
             rb.velocity = Vector3.zero; // 現在の速度をリセット
             rb.AddForce(knockbackDirection * knockbackPower, ForceMode.VelocityChange);
-            KB_Flag = true;
+            
         }
 
         // ジャンプカウントのリセット

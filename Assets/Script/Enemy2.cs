@@ -22,6 +22,10 @@ public class Enemy2 : MonoBehaviour
     [SerializeField]
     search_Script search;
     Rigidbody rb;
+    public Transform[] points;
+    int destpoint;
+    [SerializeField]
+    Transform parent;
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -42,6 +46,16 @@ public class Enemy2 : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
         //Agent.SetDestination(player.position);
         search = transform.GetChild(0).gameObject.GetComponent<search_Script>();
+        
+        destpoint = 0;
+        parent = GameObject.Find("JUNKAI ").transform;
+        Debug.Log(parent.childCount);
+        points = new Transform[parent.childCount];
+        for (int i = 0;i< parent.childCount; i++)
+        {
+            points[i] = parent.GetChild(i);
+        }
+        goto_nextpoint();
     }
 
     // Update is called once per frame
@@ -61,6 +75,10 @@ public class Enemy2 : MonoBehaviour
         }
 
         // transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
+        if (!Agent.pathPending && Agent.remainingDistance < 0.5f)
+        {
+            goto_nextpoint();
+        }
     }
     private IEnumerator JumpForward()
     {
@@ -78,4 +96,14 @@ public class Enemy2 : MonoBehaviour
             yield return new WaitForSeconds(5.0f); // ƒWƒƒƒ“ƒvŒã‚É‘Ò‹@
         }
     }
+    void goto_nextpoint()
+    {
+        Agent.destination = points[destpoint].position;
+        destpoint += 1;
+        if (points.Length <= destpoint)
+        {
+            destpoint = 0;
+        }
+    }
+        
 }
