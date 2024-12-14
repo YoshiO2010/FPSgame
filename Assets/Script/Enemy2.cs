@@ -69,10 +69,7 @@ public class Enemy2 : MonoBehaviour
             Destroy(gameObject);
 
         }
-        if (search.found_flag == true)
-        {
-            StartCoroutine(JumpForward()); // 前方にジャンプ
-        }
+        
 
         // transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
         if (!Agent.pathPending && Agent.remainingDistance < 0.5f)
@@ -80,20 +77,23 @@ public class Enemy2 : MonoBehaviour
             goto_nextpoint();
         }
     }
-    private IEnumerator JumpForward()
+    public IEnumerator JumpForward()
     {
         if (rb != null)
         {
             // 前方（プレイヤー方向）にジャンプ
             Vector3 direction = (player.position - transform.position).normalized; // プレイヤー方向の正規化ベクトル
-            direction.y = 0.5f; // 上方向の成分を加える
-            //rb.AddForce(direction * KBpower, ForceMode.Impulse);
+            direction.y = 0.3f; // 上方向の成分を加える
+            Agent.enabled = false;
+            rb.isKinematic = false;
+            rb.AddForce(direction * speed, ForceMode.VelocityChange);
 
-            rb.velocity = direction;
+           
 
             //search.found_flag = false;
 
-            yield return new WaitForSeconds(5.0f); // ジャンプ後に待機
+            yield return new WaitForSeconds(2.0f); // ジャンプ後に待機
+            player.gameObject.GetComponent<player_controller>().KB_Flag = false;
         }
     }
     void goto_nextpoint()

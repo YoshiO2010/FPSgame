@@ -183,7 +183,16 @@ void Move()
             // ノックバック処理
             Vector3 Direction = (transform.position - collision.transform.position).normalized;
             Vector3 knockbackDirection = new Vector3(Direction.x,1, Direction.z).normalized;
-            float knockbackPower = collision.gameObject.GetComponent<Enemy>().KBpower;
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            float knockbackPower;
+            if (enemy != null)
+            {
+                knockbackPower = collision.gameObject.GetComponent<Enemy>().KBpower;
+            }
+            else
+            {
+                knockbackPower = collision.gameObject.GetComponent<Enemy2>().KBpower;
+            }
 
             rb.velocity = Vector3.zero; // 現在の速度をリセット
             rb.AddForce(knockbackDirection * knockbackPower, ForceMode.VelocityChange);
