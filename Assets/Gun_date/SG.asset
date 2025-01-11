@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b978186a921852848b82be10b4e9d2e3, type: 3}
   m_Name: SG
   m_EditorClassIdentifier: 
-  Shootpower: 1500
+  Shootpower: 500
   ct: 0.4
   Max_magazine: 8
   relod_time: 0.6

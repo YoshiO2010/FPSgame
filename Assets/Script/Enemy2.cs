@@ -26,6 +26,7 @@ public class Enemy2 : MonoBehaviour
     int destpoint;
     [SerializeField]
     Transform parent;
+    public bool MITUKETA;
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -37,6 +38,8 @@ public class Enemy2 : MonoBehaviour
     }
     void Start()
     {
+        
+        MITUKETA = false;
         rb = GetComponent<Rigidbody>();
         gun = FindObjectOfType<shooter>();
         Gamemanager = GameObject.FindWithTag("GameController");
@@ -56,6 +59,7 @@ public class Enemy2 : MonoBehaviour
             points[i] = parent.GetChild(i);
         }
         goto_nextpoint();
+        StartCoroutine(JumpForward());
     }
 
     // Update is called once per frame
@@ -76,24 +80,45 @@ public class Enemy2 : MonoBehaviour
         {
             goto_nextpoint();
         }
+        if (MITUKETA)
+        {
+            transform.LookAt(player);
+        }
     }
     public IEnumerator JumpForward()
     {
         if (rb != null)
         {
-            // 前方（プレイヤー方向）にジャンプ
-            Vector3 direction = (player.position - transform.position).normalized; // プレイヤー方向の正規化ベクトル
-            direction.y = 0.3f; // 上方向の成分を加える
-            Agent.enabled = false;
-            rb.isKinematic = false;
-            rb.AddForce(direction * speed, ForceMode.VelocityChange);
+            while (true)
+            {
+                if (MITUKETA)
+                {
+                   
+                    Agent.enabled = false;
+                    rb.isKinematic = false;
+                    while (MITUKETA)
+                    {
 
-           
+                        yield return new WaitForSeconds(1.0f);
+                        // 前方（プレイヤー方向）にジャンプ
+                        Vector3 direction = (player.position - transform.position); // プレイヤー方向の正規化ベクトル
+                        direction.y = 0;
+                        direction=direction.normalized;
+                        direction.y = 0.2f; // 上方向の成分を加える
 
-            //search.found_flag = false;
+                        rb.AddForce(direction * speed, ForceMode.Impulse);
+                        yield return new WaitForSeconds(1.5f); // ジャンプ後に待機
 
-            yield return new WaitForSeconds(2.0f); // ジャンプ後に待機
-            player.gameObject.GetComponent<player_controller>().KB_Flag = false;
+                    }
+                    Agent.enabled = true;
+                    rb.isKinematic = true;
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+            
         }
     }
     void goto_nextpoint()

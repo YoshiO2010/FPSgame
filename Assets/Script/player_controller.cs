@@ -40,8 +40,10 @@ public class player_controller : MonoBehaviour
     [SerializeField]
     float KBP;
     public bool KB_Flag;
+    public GameObject END;
     void Start()
     {
+        END.SetActive(false);
         KB_Flag = false;
         rb = GetComponent<Rigidbody>();
         //MAXjump_count = 2;
@@ -54,6 +56,7 @@ public class player_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Move();
         if (!testmood)
         {
@@ -82,7 +85,10 @@ public class player_controller : MonoBehaviour
             testmood = !testmood;
         }
         HPtext.text = PlayerHP.ToString();
-       
+        if (PlayerHP == 0)
+        {
+            END.SetActive(true);
+        }
     }
     
 
@@ -179,10 +185,12 @@ void Move()
         if (collision.transform.CompareTag("Enemy"))
         {
             PlayerHP -= 10;
-            KB_Flag = true;
+            StartCoroutine(Knockbacktime());
             // ノックバック処理
-            Vector3 Direction = (transform.position - collision.transform.position).normalized;
-            Vector3 knockbackDirection = new Vector3(Direction.x,1, Direction.z).normalized;
+            Vector3 Direction = (transform.position - collision.transform.position);
+            Direction.y = 0;
+            Direction = Direction.normalized;
+            Vector3 knockbackDirection = new Vector3(Direction.x,0.3f, Direction.z).normalized;
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             float knockbackPower;
             if (enemy != null)
@@ -210,6 +218,12 @@ void Move()
     {
         this.transform.position = reset;
         Cam_transfrom.localRotation = Quaternion.Euler(-77.01f, 101.3f, -10.666f);
+    }
+    public IEnumerator Knockbacktime()
+    {
+        KB_Flag = true;
+        yield return new WaitForSeconds(1f);
+        KB_Flag = false;
     }
 
 }
