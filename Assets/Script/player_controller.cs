@@ -88,6 +88,7 @@ public class player_controller : MonoBehaviour
         if (PlayerHP == 0)
         {
             END.SetActive(true);
+            GetComponent<player_controller>().enabled = false;
         }
     }
     
