@@ -41,9 +41,12 @@ public class player_controller : MonoBehaviour
     float KBP;
     public bool KB_Flag;
     public GameObject END;
+    bool invincible;
+    [SerializeField]
+    float invincible_time;
     void Start()
     {
-        END.SetActive(false);
+        invincible = false;
         KB_Flag = false;
         rb = GetComponent<Rigidbody>();
         //MAXjump_count = 2;
@@ -51,6 +54,7 @@ public class player_controller : MonoBehaviour
         Cam_transfrom.rotation = Quaternion.identity;
         Anime = GetComponent<Animator>();
         Max_HPtext.text = Max_PlayerHP.ToString();
+        END.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,18 +68,7 @@ public class player_controller : MonoBehaviour
         }
         
         Jump();
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //マウスカーソルが表示
-            Cursor.lockState = CursorLockMode.None;
-        }
-       
-        //マウスが通常の時に、かつマウスをクリックすると
-        if (Cursor.lockState == CursorLockMode.None && Input.GetMouseButtonDown(0))
-        {
-            //マウスが消える
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        
         if (Input.GetKeyDown(KeyCode.P))
         {
             Reset();
@@ -85,10 +78,26 @@ public class player_controller : MonoBehaviour
             testmood = !testmood;
         }
         HPtext.text = PlayerHP.ToString();
-        if (PlayerHP == 0)
+        if (PlayerHP <= 0)
         {
+            Cursor.lockState = CursorLockMode.None;
             END.SetActive(true);
-            GetComponent<player_controller>().enabled = false;
+            //GetComponent<player_controller>().enabled = false;
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                //マウスカーソルが表示
+                Cursor.lockState = CursorLockMode.None;
+            }
+
+            //マウスが通常の時に、かつマウスをクリックすると
+            if (Cursor.lockState == CursorLockMode.None && Input.GetMouseButtonDown(0))
+            {
+                //マウスが消える
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
     
@@ -181,10 +190,11 @@ void Move()
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.transform.tag);
 
-        if (collision.transform.CompareTag("Enemy"))
+        if (collision.transform.CompareTag("Enemy")&& invincible==false)
         {
+            invincible = true;
+            StartCoroutine(MUTEKI_time());
             PlayerHP -= 10;
             StartCoroutine(Knockbacktime());
             // ノックバック処理
@@ -226,5 +236,9 @@ void Move()
         yield return new WaitForSeconds(1f);
         KB_Flag = false;
     }
-
+    public IEnumerator MUTEKI_time()
+    {
+        yield return new WaitForSeconds(invincible_time);
+        invincible = false;
+    }
 }

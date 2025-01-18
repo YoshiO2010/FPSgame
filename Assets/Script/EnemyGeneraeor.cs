@@ -15,11 +15,17 @@ public class EnemyGeneraeor : MonoBehaviour
     Vector3 MaxLimit;
     [SerializeField]
     Vector3 MinLimit;
+    [SerializeField]
+    int spawn_num;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("player").transform;
-        Enemyspawn();
+       
+        for(int i = 0; i < spawn_num; i++)
+        {
+            Enemyspawn();
+        }
     }
 
     // Update is called once per frame

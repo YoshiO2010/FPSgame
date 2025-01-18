@@ -68,8 +68,10 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
             
         }
-        Agent.SetDestination(player.position);
-        // transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
+        if(Agent.pathStatus != NavMeshPathStatus.PathInvalid)
+        {
+            Agent.SetDestination(player.position);
+        }
     }
     private IEnumerator ResumeNavMesh()
     {

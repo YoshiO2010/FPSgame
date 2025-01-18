@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b978186a921852848b82be10b4e9d2e3, type: 3}
   m_Name: LMG
   m_EditorClassIdentifier: 
-  Shootpower: 500
-  ct: 0.1
+  Shootpower: 600
+  ct: 0.05
   Max_magazine: 100
   relod_time: 3
   taka_time: 1.5

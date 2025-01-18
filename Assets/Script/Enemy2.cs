@@ -29,7 +29,6 @@ public class Enemy2 : MonoBehaviour
     public bool MITUKETA;
     private void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.CompareTag("Buliet"))
         {
             HP -= gun.Getgundamage();
@@ -52,7 +51,6 @@ public class Enemy2 : MonoBehaviour
         
         destpoint = 0;
         parent = GameObject.Find("JUNKAI ").transform;
-        Debug.Log(parent.childCount);
         points = new Transform[parent.childCount];
         for (int i = 0;i< parent.childCount; i++)
         {
@@ -76,7 +74,7 @@ public class Enemy2 : MonoBehaviour
         
 
         // transform.position = new Vector3(transform.position.x+speed, transform.position.y, transform.position.z+speed);
-        if (!Agent.pathPending && Agent.remainingDistance < 0.5f)
+        if (!Agent.pathPending && Agent.pathStatus!=NavMeshPathStatus.PathInvalid &&  Agent.remainingDistance < 0.5f)
         {
             goto_nextpoint();
         }

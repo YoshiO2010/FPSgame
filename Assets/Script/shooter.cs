@@ -86,7 +86,7 @@ public class shooter : MonoBehaviour
 
                 for (float i = 0; i < gundata[Gun_Num].DG.pellet; i++)
                 {
-                    Debug.Log("”­ŽË");
+                    
                     GameObject Bullet = Instantiate(Bullet_prefabe);
 
                     Bullet.transform.position = gundata[Gun_Num].startpoint.position;

@@ -24,10 +24,10 @@ public class search_Script : MonoBehaviour
         
         if (other.tag == "player")
         {
-            //Debug.Log("TIKAI");
+           
             Vector3 playerdirection = other.transform.position - transform.position;
             float angle = Vector3.Angle(transform.forward, playerdirection);
-            //Debug.Log("MITUKETA");
+           
             enemy2.MITUKETA = true;
             //StartCoroutine(enemy2.JumpForward());
             if (angle <= search_angle)

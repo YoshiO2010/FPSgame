@@ -17,13 +17,10 @@ public class Restartbo : MonoBehaviour
     {
        
     }
-    public void start_button() //change_buttonという名前にします
+    public void start_button() 
     {
-        SceneManager.LoadScene("Gamescene");//secondを呼び出します
+        SceneManager.LoadScene("Gamescene");
     }
-    public void change_button() //change_buttonという名前にします
-    {
-        SceneManager.LoadScene("Title");//secondを呼び出します
-    }
+    
 
 }
