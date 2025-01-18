@@ -8,6 +8,7 @@ TagManager:
   - player
   - wall
   - Enemy
+  - Game_mane
   layers:
   - Default
   - TransparentFX
