@@ -21,6 +21,12 @@ public class Restartbo : MonoBehaviour
     {
         SceneManager.LoadScene("Gamescene");
     }
-    
-
+    public void Return_Title_button()
+    {
+        SceneManager.LoadScene("Title");
+    }
+    public void Return_Option()
+    {
+        
+    }
 }

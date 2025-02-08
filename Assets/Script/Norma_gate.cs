@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class Norma_gate : MonoBehaviour
 {
     Gamemode_mane GMM;
+    [SerializeField]
+    Gamemode mode;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +21,10 @@ public class Norma_gate : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.transform.tag);
+       // Debug.Log(collision.transform.tag);
         if (collision.transform.CompareTag("player"))
         {
-            GMM.setgamemode(1);
+            GMM.setgamemode(mode);
             SceneManager.LoadScene("Gamescene");
         }
     }

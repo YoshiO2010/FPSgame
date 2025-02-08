@@ -7,7 +7,7 @@ public class search_Script : MonoBehaviour
     [SerializeField]
     float search_angle;
     [SerializeField]
-    Enemy2 enemy2;
+    Enemy enemy2;
     // Start is called before the first frame update
     void Start()
     {

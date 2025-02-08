@@ -1,21 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum Gamemode
+{
+    easy,
+    normal,
+    hard,
 
+}
 public class Gamemode_mane : MonoBehaviour
 {
-    public enum Gamemode
-    {
-        easy,
-        normal,
-        hard,
-
-    }
+   
     public Gamemode gamemode;
+    public static Gamemode_mane GMode;
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        if (Gamemode_mane.GMode==null)
+        {
+            GMode = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -23,8 +32,8 @@ public class Gamemode_mane : MonoBehaviour
     {
         
     }
-    public void setgamemode(int gamemode_index)
+    public void setgamemode(Gamemode gamemode_index)
     {
-        gamemode =(Gamemode) gamemode_index;
+        gamemode = gamemode_index;
     }
 }

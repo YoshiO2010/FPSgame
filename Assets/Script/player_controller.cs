@@ -190,33 +190,26 @@ void Move()
     }
     void OnCollisionEnter(Collision collision)
     {
-
-        if (collision.transform.CompareTag("Enemy")&& invincible==false)
+        Enemy enemy_script = collision.gameObject.GetComponent<Enemy>();
+        if (collision.transform.CompareTag("Enemy")&& invincible==false&& enemy_script != null)
         {
             invincible = true;
             StartCoroutine(MUTEKI_time());
-            PlayerHP -= 10;
+            PlayerHP -= enemy_script.Attack_power;
             StartCoroutine(Knockbacktime());
             // ノックバック処理
             Vector3 Direction = (transform.position - collision.transform.position);
             Direction.y = 0;
             Direction = Direction.normalized;
             Vector3 knockbackDirection = new Vector3(Direction.x,0.3f, Direction.z).normalized;
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            
             float knockbackPower;
-            if (enemy != null)
-            {
-                knockbackPower = collision.gameObject.GetComponent<Enemy>().KBpower;
-            }
-            else
-            {
-                knockbackPower = collision.gameObject.GetComponent<Enemy2>().KBpower;
-            }
-
+            knockbackPower = enemy_script.KBpower;
             rb.velocity = Vector3.zero; // 現在の速度をリセット
             rb.AddForce(knockbackDirection * knockbackPower, ForceMode.VelocityChange);
             
         }
+
 
         // ジャンプカウントのリセット
         jump_count = 0;

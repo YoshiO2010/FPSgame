@@ -17,15 +17,36 @@ public class EnemyGeneraeor : MonoBehaviour
     Vector3 MinLimit;
     [SerializeField]
     int spawn_num;
+    Gamemode_mane Level;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("player").transform;
+       Level= GameObject.FindWithTag("Game_mane").GetComponent<Gamemode_mane>();
+        if (Level != null)
+        {
+            switch (Level.gamemode)
+            {
+                case Gamemode.easy:
+                    spawn_num = 3;
+                    break;
+                case Gamemode.normal:
+                    spawn_num = 5;
+                    break;
+                case Gamemode.hard:
+                    spawn_num = 7;
+                    break;
+                default:
+                    break;
+            }
+        }
        
-        for(int i = 0; i < spawn_num; i++)
+        
+        for (int i = 0; i < spawn_num; i++)
         {
             Enemyspawn();
         }
+
     }
 
     // Update is called once per frame
@@ -44,8 +65,22 @@ public class EnemyGeneraeor : MonoBehaviour
         Vector3 spawmpos;
         spawmpos = new Vector3(x, y, z);
         int ramdom = Random.Range(0, Enemyprefab.Length);
-        Instantiate(Enemyprefab[ramdom], spawmpos, Quaternion.identity);
-       
-       
+        GameObject enemy_obj=Instantiate(Enemyprefab[ramdom], spawmpos, Quaternion.identity);
+        Enemy enemy_src = enemy_obj.GetComponent<Enemy>();
+        switch (Level.gamemode)
+        {
+            case Gamemode.easy:
+                enemy_src.Attack_power = 5;
+                break;
+            case Gamemode.normal:
+                enemy_src.Attack_power = 10;
+                break;
+            case Gamemode.hard:
+                enemy_src.Attack_power = 20;
+                break;
+            default:
+                break;
+        }
+
     }
 }
