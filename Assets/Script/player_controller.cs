@@ -49,12 +49,15 @@ public class player_controller : MonoBehaviour
         invincible = false;
         KB_Flag = false;
         rb = GetComponent<Rigidbody>();
-        //MAXjump_count = 2;
+        Max_PlayerHP = PlayerPrefs.GetFloat("HP", 100);
+        MAXjump_count = PlayerPrefs.GetInt("Max_jump",2);
+        move_speed = PlayerPrefs.GetFloat("Speed", 6);
         reset = this.transform.position;
         Cam_transfrom.rotation = Quaternion.identity;
         Anime = GetComponent<Animator>();
         Max_HPtext.text = Max_PlayerHP.ToString();
         END.SetActive(false);
+
     }
 
     // Update is called once per frame

@@ -9,18 +9,39 @@ public class Shop_BuyScript : MonoBehaviour
     [SerializeField]
     int Up_amout;
     [SerializeField]
-    int Power;
-    // Start is called before the first frame update
-    void Start()
+    int Powerint;
+    [SerializeField]
+    float Powerfloat;
+    [SerializeField]
+    public enum type
     {
-        Power= PlayerPrefs.GetInt(key_name, 0);
-         
+        Int,Float,Bool
     }
-    void Up_Glade_Buy()
+    [SerializeField]
+    type Type = type.Float;
+    // Start is called before the first frame update
+    void OnEnable()
     {
-        Power += Up_amout;
-        PlayerPrefs.SetInt(key_name, Power);
-        PlayerPrefs.Save();
+        Powerint= PlayerPrefs.GetInt(key_name, 0);
+        Powerfloat = PlayerPrefs.GetFloat(key_name, 0);
+
+    }
+    public void Up_Glade_Buy()
+    {
+        if (Type == type.Float)
+        {
+            Powerfloat += Up_amout;
+            PlayerPrefs.SetFloat(key_name, Powerfloat);
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            Powerint += Up_amout;
+            PlayerPrefs.SetInt(key_name, Powerint);
+            PlayerPrefs.Save();
+        }
+       
+        
     }
     // Update is called once per frame
     void Update()

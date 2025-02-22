@@ -100,7 +100,14 @@ public class Title_con : MonoBehaviour
         {
             Optioning = !Optioning;
             Option_UI.SetActive(Optioning);
-            Time.timeScale = 0;
+            if (Optioning == true)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
             //マウスカーソルが表示
             Cursor.lockState = CursorLockMode.None;
         }
@@ -108,7 +115,14 @@ public class Title_con : MonoBehaviour
         {
             Open_Inventory = !Open_Inventory;
             status_UI.SetActive(Open_Inventory);
-            Time.timeScale = 0;
+            if (Optioning == true)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
             //マウスカーソルが表示
             Cursor.lockState = CursorLockMode.None;
         }
