@@ -34,6 +34,6 @@ public class Status_UI : MonoBehaviour
         TextMeshProUGUI Max_junp_amount_text = Status_MAxamount_text.GetComponent<TextMeshProUGUI>();
         Max_junp_amount_text.text =Maxjunp_amount.ToString();
         TextMeshProUGUI Speed_text = Status_Speedtext.GetComponent<TextMeshProUGUI>();
-        Speed_text.text =Speed.ToString();
+        Speed_text.text =Speed.ToString("f1");
     }
 }

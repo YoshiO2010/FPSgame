@@ -13,12 +13,22 @@ public class Shop_sctipt : MonoBehaviour
     GameObject Gun_Shop_panel;
     [SerializeField]
     GameObject AR_statuspanel;
+    [SerializeField]
+    GameObject MLG_statuspanel;
+    [SerializeField]
+    GameObject SG_statuspanel;
+    [SerializeField]
+    GameObject SR_statuspanel;
 
     // Start is called before the first frame update
     void Start()
     {
         money_num = PlayerPrefs.GetInt("MONEY", 0);
         AR_statuspanel.SetActive(false);
+        MLG_statuspanel.SetActive(false);
+        SG_statuspanel.SetActive(false);
+        SR_statuspanel.SetActive(false);
+
     }
     private void OnDestroy()
     {
@@ -33,7 +43,7 @@ public class Shop_sctipt : MonoBehaviour
             Close_shoppanel();
         }
         TextMeshProUGUI money_text = money_Object.GetComponent<TextMeshProUGUI>();
-
+        money_num = PlayerPrefs.GetInt("MONEY", 0);
         money_text.text = "Money"+money_num;
         
     }
@@ -56,6 +66,30 @@ public class Shop_sctipt : MonoBehaviour
     }
     public void Display_ARstatus()
     {
+        SG_statuspanel.SetActive(false);
+        SR_statuspanel.SetActive(false);
+        MLG_statuspanel.SetActive(false);
         AR_statuspanel.SetActive(true);
+    }
+    public void Display_MLGstatus()
+    {
+        SG_statuspanel.SetActive(false);
+        SR_statuspanel.SetActive(false);
+        MLG_statuspanel.SetActive(true);
+        AR_statuspanel.SetActive(false);
+    }
+    public void Display_Sgstatus()
+    {
+        SR_statuspanel.SetActive(false);
+        AR_statuspanel.SetActive(false);
+        MLG_statuspanel.SetActive(false);
+        SG_statuspanel.SetActive(true);
+    }
+    public void Display_SRstatus()
+    {
+        AR_statuspanel.SetActive(false);
+        MLG_statuspanel.SetActive(false);
+        SG_statuspanel.SetActive(false);
+        SR_statuspanel.SetActive(true);
     }
 }

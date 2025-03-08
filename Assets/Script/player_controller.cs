@@ -50,6 +50,7 @@ public class player_controller : MonoBehaviour
         KB_Flag = false;
         rb = GetComponent<Rigidbody>();
         Max_PlayerHP = PlayerPrefs.GetFloat("HP", 100);
+        PlayerHP = Max_PlayerHP;
         MAXjump_count = PlayerPrefs.GetInt("Max_jump",2);
         move_speed = PlayerPrefs.GetFloat("Speed", 6);
         reset = this.transform.position;
