@@ -10,8 +10,19 @@ public struct GunData
     public Animator Gun_animator;
 }
 
+
 public class shooter : MonoBehaviour
 {
+    public Gun_tipe ET;
+    string tipe_name;
+    public enum Gun_tipe
+    {
+        AR,
+        MLG,
+        SG,
+        SR,
+    }
+
     [SerializeField]
     GameObject Bullet_prefabe;
     [SerializeField]
@@ -55,10 +66,29 @@ public class shooter : MonoBehaviour
 
     void Start()
     {
+        switch (ET)
+        {
+            case Gun_tipe.AR:
+                tipe_name = "AR";
+
+                break;
+            case Gun_tipe.MLG:
+                tipe_name = "MLG";
+
+                break;
+            case Gun_tipe.SG:
+                tipe_name = "SG";
+
+                break;
+            case Gun_tipe.SR:
+                tipe_name = "SR";
+
+                break;
+        }
         take = false;
         take_ct = 0f;
         ct_time = 0f;
-        magazine = gundata[Gun_Num].DG.Max_magazine; //Max_magazine;
+        magazine = gundata[Gun_Num].DG.Max_magazine+1*(PlayerPrefs.GetInt((string)tipe_name+"Max_magazine_puls")); //Max_magazine;
         relod = false;
         relod_ct = 0f;
         for (int i = 0; relod_mada.Length > i; i++)
@@ -72,6 +102,7 @@ public class shooter : MonoBehaviour
         Max_magazine_Text.text = gundata[Gun_Num].DG.Max_magazine.ToString();
         GunObject = Gun_objlist[Gun_Num];
         point = Gun_pointlist[Gun_Num];
+        
     }
 
     // Update is called once per frame

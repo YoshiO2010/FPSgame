@@ -19,6 +19,10 @@ public class Shop_sctipt : MonoBehaviour
     GameObject SG_statuspanel;
     [SerializeField]
     GameObject SR_statuspanel;
+    [SerializeField]
+    GameObject Gunshop_moneyObj;
+    [SerializeField]
+    GameObject Shop_panel_file;
 
     // Start is called before the first frame update
     void Start()
@@ -44,8 +48,10 @@ public class Shop_sctipt : MonoBehaviour
         }
         TextMeshProUGUI money_text = money_Object.GetComponent<TextMeshProUGUI>();
         money_num = PlayerPrefs.GetInt("MONEY", 0);
+        Debug.Log(money_num);
         money_text.text = "Money"+money_num;
-        
+        TextMeshProUGUI Money_text = Gunshop_moneyObj.GetComponent<TextMeshProUGUI>();
+        Money_text.text = "MONEY:\n" + money_num;
     }
     void Close_shoppanel()
     {
@@ -55,11 +61,15 @@ public class Shop_sctipt : MonoBehaviour
     }
     public void Open_Gunpanel()
     {
-        gameObject.SetActive(false);
+        Shop_panel_file.SetActive(false);
         Gun_Shop_panel.SetActive(true);
+        Gunshop_moneyObj.SetActive(true);
+        //TextMeshProUGUI Money_text = Gunshop_moneyObj.GetComponent<TextMeshProUGUI>();
+        //Money_text.text = "MONEY:\n" + money_num;
     }
     public void Close_panel()
     {
+        gameObject.SetActive(false);
         Gun_Shop_panel.SetActive(false);
         GameObject.FindWithTag("player").GetComponent<Title_con>().Shopping = false;
         Cursor.lockState = CursorLockMode.Locked;
