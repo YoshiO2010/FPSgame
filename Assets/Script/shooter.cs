@@ -22,7 +22,12 @@ public class shooter : MonoBehaviour
         SG,
         SR,
     }
-
+    public float Shootpower;
+    public float ct;
+    public int Max_magazine;
+    public float relod_time;
+    public float take_time;
+    public int Damage;
     [SerializeField]
     GameObject Bullet_prefabe;
     [SerializeField]
@@ -88,7 +93,13 @@ public class shooter : MonoBehaviour
         take = false;
         take_ct = 0f;
         ct_time = 0f;
-        magazine = gundata[Gun_Num].DG.Max_magazine+1*(PlayerPrefs.GetInt((string)tipe_name+"Max_magazine_puls")); //Max_magazine;
+        Shootpower= gundata[Gun_Num].DG.Shootpower + 10 * (PlayerPrefs.GetFloat((string)tipe_name + "Shootpower_puls"));
+        Max_magazine = gundata[Gun_Num].DG.Max_magazine+1*(PlayerPrefs.GetInt((string)tipe_name+"Max_magazine_puls")); //Max_magazine;
+        magazine = Max_magazine;
+        ct= gundata[Gun_Num].DG.ct - 0.001f* (PlayerPrefs.GetFloat((string)tipe_name + "ct_puls"));
+        relod_time= gundata[Gun_Num].DG.relod_time - 0.01f * (PlayerPrefs.GetFloat((string)tipe_name + "relod_time_puls"));
+        take_time= gundata[Gun_Num].DG.taka_time - 0.01f * (PlayerPrefs.GetFloat((string)tipe_name + "take_time_puls"));
+        Damage= gundata[Gun_Num].DG.Damage + 1 * (PlayerPrefs.GetInt((string)tipe_name + "damage_puls"));
         relod = false;
         relod_ct = 0f;
         for (int i = 0; relod_mada.Length > i; i++)
@@ -99,7 +110,8 @@ public class shooter : MonoBehaviour
         {
             relod_zumi[i].gameObject.SetActive(false);
         }
-        Max_magazine_Text.text = gundata[Gun_Num].DG.Max_magazine.ToString();
+
+        Max_magazine_Text.text =Max_magazine.ToString();
         GunObject = Gun_objlist[Gun_Num];
         point = Gun_pointlist[Gun_Num];
         
@@ -111,7 +123,7 @@ public class shooter : MonoBehaviour
         ct_time += Time.deltaTime;
         if (Input.GetMouseButton(0)&&relod==false&&take==false)
         {
-            if (ct_time >= gundata[Gun_Num].DG.ct && magazine > 0)
+            if (ct_time >= ct && magazine > 0)
             {
 
 
@@ -165,13 +177,13 @@ public class shooter : MonoBehaviour
                 relod_mada[i].gameObject.SetActive(true);
             }
                 relod = true;
-            relod_ct = Time.time + gundata[Gun_Num].DG.relod_time;
+            relod_ct = Time.time + relod_time;
             //relod_mada.gameObject.SetActive(true);
         }
         
         for (int i = 0; relod_zumi.Length > i; i++)
         {
-            if (relod_ct - gundata[Gun_Num].DG.relod_time * (relod_zumi.Length - i) / relod_zumi.Length < Time.time && relod == true)
+            if (relod_ct -relod_time * (relod_zumi.Length - i) / relod_zumi.Length < Time.time && relod == true)
             {
                 relod_zumi[i].gameObject.SetActive(true);
             }
@@ -180,7 +192,7 @@ public class shooter : MonoBehaviour
         if (relod_ct < Time.time&&relod==true)
         {
            // relod_mada.gameObject.SetActive(false);
-            magazine = gundata[Gun_Num].DG.Max_magazine;
+            magazine = Max_magazine;
             relod = false;
             for (int i = 0; relod_mada.Length > i; i++)
             {
@@ -200,9 +212,9 @@ public class shooter : MonoBehaviour
             {
                 Gun_Num = 0;
             }
-            magazine = gundata[Gun_Num].DG.Max_magazine;
+            magazine = Max_magazine;
             take = false;
-            Max_magazine_Text.text =  gundata[Gun_Num].DG.Max_magazine.ToString();
+            Max_magazine_Text.text =  Max_magazine.ToString();
             for (int i = 0; i < gundata.Length; i++)
             {
                 if (i == Gun_Num)
@@ -246,50 +258,58 @@ public class shooter : MonoBehaviour
     public int Getgundamage() 
     {
 
-        return gundata[Gun_Num].DG.Damage;
+        return Damage;
     }
     void Changegun()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             take = true;
-            take_ct = Time.time + gundata[Gun_Num].DG.taka_time;
+            take_ct = Time.time + take_time;
             Gun_Num++;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             take = true;
-            take_ct = Time.time + gundata[0].DG.taka_time;
+            take_ct = Time.time + take_time;
             Gun_Num = 0;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             take = true;
-            take_ct = Time.time + gundata[1].DG.taka_time;
+            take_ct = Time.time + take_time;
             Gun_Num = 1;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             take = true;
-            take_ct = Time.time + gundata[2].DG.taka_time;
+            take_ct = Time.time + take_time;
             Gun_Num = 2;
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             take = true;
-            take_ct = Time.time + gundata[3].DG.taka_time;
+            take_ct = Time.time + take_time;
             Gun_Num = 3;
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             take = true;
-            take_ct = Time.time + gundata[4].DG.taka_time;
+            take_ct = Time.time + take_time;
             Gun_Num = 4;
         }
         GunObject.SetActive(false);
         GunObject = Gun_objlist[Gun_Num];
         GunObject.SetActive(true);
         point = Gun_pointlist[Gun_Num];
+        Shootpower = gundata[Gun_Num].DG.Shootpower + 10 * (PlayerPrefs.GetFloat((string)tipe_name + "Shootpower_puls"));
+        Max_magazine = gundata[Gun_Num].DG.Max_magazine + 1 * (PlayerPrefs.GetInt((string)tipe_name + "Max_magazine_puls")); //Max_magazine;
+        magazine = Max_magazine;
+        ct = gundata[Gun_Num].DG.ct - 0.001f * (PlayerPrefs.GetFloat((string)tipe_name + "ct_puls"));
+        relod_time = gundata[Gun_Num].DG.relod_time - 0.01f * (PlayerPrefs.GetFloat((string)tipe_name + "relod_time_puls"));
+        take_time = gundata[Gun_Num].DG.taka_time - 0.01f * (PlayerPrefs.GetFloat((string)tipe_name + "take_time_puls"));
+        Damage = gundata[Gun_Num].DG.Damage + 1 * (PlayerPrefs.GetInt((string)tipe_name + "damage_puls"));
+        Max_magazine_Text.text = Max_magazine.ToString();
     }
     private void OnAnimatorIK(int layerIndex)
     {
