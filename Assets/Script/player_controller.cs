@@ -44,8 +44,10 @@ public class player_controller : MonoBehaviour
     bool invincible;
     [SerializeField]
     float invincible_time;
+    bool Gameover_Flag;
     void Start()
     {
+        Gameover_Flag = false;
         invincible = false;
         KB_Flag = false;
         rb = GetComponent<Rigidbody>();
@@ -82,10 +84,12 @@ public class player_controller : MonoBehaviour
             testmood = !testmood;
         }
         HPtext.text = PlayerHP.ToString();
-        if (PlayerHP <= 0)
+        if (PlayerHP <= 0&&Gameover_Flag==false)
         {
+            Gameover_Flag = true;
             Cursor.lockState = CursorLockMode.None;
             END.SetActive(true);
+            GameObject.FindWithTag("GameController").GetComponent<Score>().resultMoney();
             //GetComponent<player_controller>().enabled = false;
         }
         else
@@ -97,7 +101,7 @@ public class player_controller : MonoBehaviour
             }
 
             //マウスが通常の時に、かつマウスをクリックすると
-            if (Cursor.lockState == CursorLockMode.None && Input.GetMouseButtonDown(0))
+            if (Cursor.lockState == CursorLockMode.None && Input.GetMouseButtonDown(0)&&Gameover_Flag==false)
             {
                 //マウスが消える
                 Cursor.lockState = CursorLockMode.Locked;

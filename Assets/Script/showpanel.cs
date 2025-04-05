@@ -18,6 +18,8 @@ public class showpanel : MonoBehaviour
     TextMeshProUGUI Interact_text;
     [SerializeField]
     GameObject Shop_panel;
+    [SerializeField]
+    GameObject Shop_panel_file;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +39,10 @@ public class showpanel : MonoBehaviour
             keypanel.SetActive(true);
             if (Input.GetKeyDown(Interact_Key))
             {
+
                 player_obj.GetComponent<Title_con>().Shopping = true;
                 Shop_panel.SetActive(true);
+                Shop_panel_file.SetActive(true);
                 Debug.Log("Shop");
                 //マウスカーソルが表示
                 Cursor.lockState = CursorLockMode.None;

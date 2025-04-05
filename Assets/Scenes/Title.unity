@@ -5238,6 +5238,7 @@ MonoBehaviour:
   Interact_str: E
   Interact_text: {fileID: 616208682}
   Shop_panel: {fileID: 1072788121}
+  Shop_panel_file: {fileID: 415514686}
 --- !u!1 &811308138
 GameObject:
   m_ObjectHideFlags: 0

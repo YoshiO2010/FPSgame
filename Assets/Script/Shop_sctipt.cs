@@ -27,7 +27,7 @@ public class Shop_sctipt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        money_num = PlayerPrefs.GetInt("MONEY", 0);
+        money_num = PlayerPrefs.GetInt("MONEY", 500);
         AR_statuspanel.SetActive(false);
         MLG_statuspanel.SetActive(false);
         SG_statuspanel.SetActive(false);
@@ -44,21 +44,21 @@ public class Shop_sctipt : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Close_shoppanel();
+            Close_panel();
         }
         TextMeshProUGUI money_text = money_Object.GetComponent<TextMeshProUGUI>();
-        money_num = PlayerPrefs.GetInt("MONEY", 0);
+        money_num = PlayerPrefs.GetInt("MONEY", 500);
         Debug.Log(money_num);
         money_text.text = "Money"+money_num;
         TextMeshProUGUI Money_text = Gunshop_moneyObj.GetComponent<TextMeshProUGUI>();
         Money_text.text = "MONEY:\n" + money_num;
     }
-    void Close_shoppanel()
+    /*void Close_shoppanel()
     {
         GameObject.FindWithTag("player").GetComponent<Title_con>().Shopping=false;
         gameObject.SetActive(false);
 
-    }
+    }*/
     public void Open_Gunpanel()
     {
         Shop_panel_file.SetActive(false);

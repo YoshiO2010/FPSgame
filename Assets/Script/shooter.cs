@@ -204,14 +204,35 @@ public class shooter : MonoBehaviour
             }
         }
         //relod_mada.value = (Time.time - relod_ct+relod_time) / relod_time
-        Changegun();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Changegun();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Changegun();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Changegun();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Changegun();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            Changegun();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            Changegun();
+        }
+
         if (take_ct < Time.time&&take==true) 
         {
             
-            if (gundata.Length <= Gun_Num)
-            {
-                Gun_Num = 0;
-            }
+            
             magazine = Max_magazine;
             take = false;
             Max_magazine_Text.text =  Max_magazine.ToString();
@@ -267,40 +288,51 @@ public class shooter : MonoBehaviour
             take = true;
             take_ct = Time.time + take_time;
             Gun_Num++;
+            if (gundata.Length <= Gun_Num)
+            {
+                Gun_Num = 0;
+            }
+            tipe_name = gundata[Gun_Num].DG.name;
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             take = true;
             take_ct = Time.time + take_time;
+            tipe_name ="SMG";
             Gun_Num = 0;
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             take = true;
             take_ct = Time.time + take_time;
+            tipe_name = "SR";
             Gun_Num = 1;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             take = true;
             take_ct = Time.time + take_time;
+            tipe_name = "LMG";
             Gun_Num = 2;
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             take = true;
             take_ct = Time.time + take_time;
+            tipe_name = "AR";
             Gun_Num = 3;
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             take = true;
             take_ct = Time.time + take_time;
+            tipe_name = "SG";
             Gun_Num = 4;
         }
         GunObject.SetActive(false);
         GunObject = Gun_objlist[Gun_Num];
         GunObject.SetActive(true);
+        Debug.Log(tipe_name);
         point = Gun_pointlist[Gun_Num];
         Shootpower = gundata[Gun_Num].DG.Shootpower + 10 * (PlayerPrefs.GetFloat((string)tipe_name + "Shootpower_puls"));
         Max_magazine = gundata[Gun_Num].DG.Max_magazine + 1 * (PlayerPrefs.GetInt((string)tipe_name + "Max_magazine_puls")); //Max_magazine;

@@ -58,7 +58,7 @@ public class Gun_shopscript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        money_num = PlayerPrefs.GetInt("MONEY", 0);
+        money_num = PlayerPrefs.GetInt("MONEY", 500);
 
        
         Shootpower = gundata.Shootpower;
@@ -75,7 +75,7 @@ public class Gun_shopscript : MonoBehaviour
 
                 break;
             case Gun_tipe.MLG:
-                tipe_name = "MLG";
+                tipe_name = "LMG";
                 
                 break;
             case Gun_tipe.SG:
@@ -121,7 +121,7 @@ public class Gun_shopscript : MonoBehaviour
     {
         float power_UP_amount=1;
         int power_UP_cost=100;
-        money_num = PlayerPrefs.GetInt("MONEY", 0);
+        money_num = PlayerPrefs.GetInt("MONEY", 500);
         if (money_num >= power_UP_cost)
         {
             switch (key_name)
