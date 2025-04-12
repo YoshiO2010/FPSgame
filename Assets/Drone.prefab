@@ -214,8 +214,14 @@ MonoBehaviour:
   gun: {fileID: 0}
   MaxHP: 5
   HP: 5
-  KBpower: 10
+  KBpower: 30
+  ET: 0
+  search: {fileID: 0}
+  points: []
+  parent: {fileID: 0}
+  MITUKETA: 0
   speed: 0.01
+  Attack_power: 0
 --- !u!195 &6775238928394128685
 NavMeshAgent:
   m_ObjectHideFlags: 0

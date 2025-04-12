@@ -7191,28 +7191,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_speed: 6
-  Cam_sensitivity: 5
+  DS_SP: 2
   Jump_power: 600
-  Cam_transfrom: {fileID: 1180580467}
   jump_count: 1
   isground: 0
   MAXjump_count: 3
-  reset: {x: 0, y: 0, z: 0}
-  DS_SP: 2
+  Cam_sensitivity: 5
+  Cam_transfrom: {fileID: 1180580467}
   Anime: {fileID: 1127505026}
-  testmood: 0
-  PlayerHP: 0
-  Max_PlayerHP: 0
-  KBP: 0
-  KB_Flag: 0
-  invincible_time: 0
   Option_UI: {fileID: 1143230026}
-  Optioning: 0
+  status_UI: {fileID: 2131091583}
   Camera_pos_1st: {fileID: 1112718948}
   Cameta_pos_3rd: {fileID: 1765082228}
   Camera_pos_rate: 1
   Shopping: 0
-  status_UI: {fileID: 2131091583}
+  Open_Inventory: 0
 --- !u!1 &1128311822
 GameObject:
   m_ObjectHideFlags: 0

@@ -667,15 +667,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_speed: 5
-  Cam_sensitivity: 7
+  DS_SP: 2
   Jump_power: 300
-  Cam_transfrom: {fileID: 963194228}
   jump_count: 1
   isground: 0
   MAXjump_count: 3
-  reset: {x: 0, y: 0, z: 0}
-  DS_SP: 2
+  Cam_sensitivity: 7
+  Cam_transfrom: {fileID: 963194228}
   Anime: {fileID: 0}
+  Option_UI: {fileID: 0}
+  status_UI: {fileID: 0}
+  reset: {x: 0, y: 0, z: 0}
   testmood: 0
   PlayerHP: 100
   Max_PlayerHP: 100
@@ -683,8 +685,8 @@ MonoBehaviour:
   Max_HPtext: {fileID: 424202476}
   KBP: 0
   KB_Flag: 0
-  END: {fileID: 1682038664}
   invincible_time: 1
+  END: {fileID: 1682038664}
 --- !u!114 &116119832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,6 +699,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44df004b37705cd45a880a851c777b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ET: 0
+  Shootpower: 0
+  ct: 0
+  Max_magazine: 0
+  relod_time: 0
+  take_time: 0
+  Damage: 0
   Bullet_prefabe: {fileID: 4758456628336036906, guid: 4a944224ceefd3345844d7a69ee9b20a, type: 3}
   cameratransform: {fileID: 963194228}
   magazine_Text: {fileID: 1063287408}
@@ -6222,15 +6231,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move_speed: 10
-  Cam_sensitivity: 7
+  DS_SP: 1.5
   Jump_power: 400
-  Cam_transfrom: {fileID: 963194228}
   jump_count: 1
   isground: 0
   MAXjump_count: 10
-  reset: {x: 0, y: 0, z: 0}
-  DS_SP: 1.5
+  Cam_sensitivity: 7
+  Cam_transfrom: {fileID: 963194228}
   Anime: {fileID: 0}
+  Option_UI: {fileID: 0}
+  status_UI: {fileID: 0}
+  reset: {x: 0, y: 0, z: 0}
   testmood: 0
   PlayerHP: 0
   Max_PlayerHP: 0
@@ -6238,8 +6249,8 @@ MonoBehaviour:
   Max_HPtext: {fileID: 0}
   KBP: 0
   KB_Flag: 0
-  END: {fileID: 0}
   invincible_time: 0
+  END: {fileID: 0}
 --- !u!54 &1659854864
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 5055948688652674032}
   - component: {fileID: 5055948688652674039}
   - component: {fileID: 1052132826523717999}
-  - component: {fileID: 5055948688652674038}
   - component: {fileID: 5055948688652674037}
   m_Layer: 0
   m_Name: Warrior
@@ -233,34 +232,14 @@ MonoBehaviour:
   gun: {fileID: 0}
   MaxHP: 10
   HP: 10
-  KBpower: 20
+  KBpower: 50
   ET: 1
   search: {fileID: 0}
   points: []
   parent: {fileID: 0}
   MITUKETA: 0
   speed: 70
---- !u!114 &5055948688652674038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5055948688652674036}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ba05d4060ed9e428a3685d105adadc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gun: {fileID: 0}
-  MaxHP: 10
-  HP: 10
-  KBpower: 20
-  speed: 70
-  search: {fileID: 0}
-  points: []
-  parent: {fileID: 0}
-  MITUKETA: 0
+  Attack_power: 0
 --- !u!195 &5055948688652674037
 NavMeshAgent:
   m_ObjectHideFlags: 0
