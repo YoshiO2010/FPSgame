@@ -24,17 +24,22 @@ public class ShooterSE : MonoBehaviour
     }
     public void PlaySE(int num)
     {
-        if (Time.time - LastGunsound > GunshootSE[num].length)
+        if (Time.time - LastGunsound > GunshootSE[num].length|| (num != 0 && num != 2 && num != 3))
         {
+            
             audiosource.PlayOneShot(GunshootSE[num]);
             LastGunsound = Time.time;
         }
         
     }
-    public IEnumerator stopSE()
+    public IEnumerator stopSE(int num)
     {
-        yield return new WaitForSeconds(1f);
-        audiosource.Stop();
-        LastGunsound = 0;
+        yield return new WaitForSeconds(2);
+        if((num != 0 && num != 2 && num != 3))
+        {
+            audiosource.Stop();
+            LastGunsound = 0;
+        }
+       
     }
 }

@@ -125,6 +125,7 @@ public class shooter : MonoBehaviour
         ct_time += Time.deltaTime;
         if (Input.GetMouseButton(0)&&relod==false&&take==false)
         {
+            
             if (ct_time >= ct && magazine > 0)
             {
                 shooterSE.PlaySE(Gun_Num);
@@ -162,11 +163,11 @@ public class shooter : MonoBehaviour
                 MF.GetComponent<ParticleSystem>().Play();
             }
            
-           
+
         }
         else
         {
-            shooterSE.stopSE();
+            StartCoroutine(shooterSE.stopSE(Gun_Num));
             if (MF != null)
             {
                 //MF.SetActive(false);
