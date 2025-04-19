@@ -67,6 +67,8 @@ public class shooter : MonoBehaviour
     [SerializeField]
     List<Transform> Gun_pointlist;
     GameObject GunObject;
+    [SerializeField]
+    ShooterSE shooterSE;
 
 
     void Start()
@@ -125,7 +127,7 @@ public class shooter : MonoBehaviour
         {
             if (ct_time >= ct && magazine > 0)
             {
-
+                shooterSE.PlaySE(Gun_Num);
 
                 for (float i = 0; i < gundata[Gun_Num].DG.pellet; i++)
                 {
@@ -164,6 +166,7 @@ public class shooter : MonoBehaviour
         }
         else
         {
+            shooterSE.stopSE();
             if (MF != null)
             {
                 //MF.SetActive(false);
