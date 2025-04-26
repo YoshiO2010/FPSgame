@@ -242,7 +242,7 @@ MonoBehaviour:
   speed: 70
   Attack_power: 0
   audiosource: {fileID: 5572300049541577519}
-  killenemy: {fileID: 8300000, guid: df59633faa5a64b4cbcb0b5e81730c4e, type: 3}
+  killenemy: {fileID: 8300000, guid: 2b2228a4f2f3fd3478ac48ecdb307372, type: 3}
 --- !u!195 &5055948688652674037
 NavMeshAgent:
   m_ObjectHideFlags: 0

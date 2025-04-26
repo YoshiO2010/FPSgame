@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
     AudioSource audiosource;
     [SerializeField]
     AudioClip killenemy;
+    bool Isdead;
     
     NavMeshAgent Agent;
     
@@ -63,6 +64,7 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
+        Isdead = false;
         switch (ET)
         {
             case Enemy_tipe.Drone:
@@ -108,12 +110,9 @@ public class Enemy : MonoBehaviour
         switch (ET)
         {
             case Enemy_tipe.Drone:
-                if (HP <= 0)
+                if (HP <= 0&&Isdead==false)
                 {
-                    Playkillsounds();
-                    EG.Enemyspawn();
-                    score.Plusscore(1);
-                    Destroy(gameObject);
+                    StartCoroutine(EnemyKill());
 
                 }
                 if (Agent.pathStatus != NavMeshPathStatus.PathInvalid)
@@ -122,12 +121,10 @@ public class Enemy : MonoBehaviour
                 }
                 break;
             case Enemy_tipe.Warrior:
-                if (HP <= 0)
+                if (HP <= 0 && Isdead == false)
                 {
-                    Playkillsounds();
-                    EG.Enemyspawn();
-                    score.Plusscore(1);
-                    Destroy(gameObject);
+                    StartCoroutine(EnemyKill());
+                    
 
                 }
 
@@ -202,5 +199,15 @@ public class Enemy : MonoBehaviour
     public void Playkillsounds()
     {
         audiosource.PlayOneShot(killenemy);
+    }
+    IEnumerator EnemyKill()
+    {
+        Isdead = true;
+        Playkillsounds();
+        yield return new WaitForSeconds(0.15f);
+
+        EG.Enemyspawn();
+        score.Plusscore(1);
+        Destroy(gameObject);
     }
 }
