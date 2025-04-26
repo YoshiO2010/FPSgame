@@ -687,6 +687,8 @@ MonoBehaviour:
   KB_Flag: 0
   invincible_time: 1
   END: {fileID: 1682038664}
+  audiosource: {fileID: 2130574542}
+  DameseSE: {fileID: 8300000, guid: 1bc1b606e8634164a98070a27c00b179, type: 3}
 --- !u!114 &116119832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6252,6 +6254,8 @@ MonoBehaviour:
   KB_Flag: 0
   invincible_time: 0
   END: {fileID: 0}
+  audiosource: {fileID: 0}
+  DameseSE: {fileID: 0}
 --- !u!54 &1659854864
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14934,7 +14938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audiosource: {fileID: 2130574542}
   GunshootSE:
-  - {fileID: 8300000, guid: 3a1e4cdc257ffae4b8155f2ef8ebc802, type: 3}
+  - {fileID: 8300000, guid: f57ceaa35287db4498690ed78d59ac93, type: 3}
   - {fileID: 8300000, guid: a480880b06e6301489acba7839a49d8a, type: 3}
   - {fileID: 8300000, guid: a3e3ea16a1d7f4f46ad2b8e470dcdb09, type: 3}
   - {fileID: 8300000, guid: 3a1e4cdc257ffae4b8155f2ef8ebc802, type: 3}

@@ -28,6 +28,10 @@ public class player_controller : Base_comtroller
     [Header("END")]
     public GameObject END;
     bool Gameover_Flag;
+    [SerializeField]
+    AudioSource audiosource;
+    [SerializeField]
+    AudioClip DameseSE;
     protected override void Start()
     {
         base.Start();
@@ -97,6 +101,7 @@ public class player_controller : Base_comtroller
             StartCoroutine(MUTEKI_time());
             PlayerHP -= enemy_script.Attack_power;
             StartCoroutine(Knockbacktime());
+            DameseSEPlay();
             // ノックバック処理
             Vector3 Direction = (transform.position - collision.transform.position);
             Direction.y = 0;
@@ -134,5 +139,9 @@ public class player_controller : Base_comtroller
     {
         yield return new WaitForSeconds(invincible_time);
         invincible = false;
+    }
+    public void DameseSEPlay()
+    {
+        audiosource.PlayOneShot(DameseSE);
     }
 }

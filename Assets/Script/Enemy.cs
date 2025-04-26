@@ -32,7 +32,11 @@ public class Enemy : MonoBehaviour
     GameObject Gamemanager;
     EnemyGeneraeor EG;
     Score score;
-    public int Attack_power; 
+    public int Attack_power;
+    [SerializeField]
+    AudioSource audiosource;
+    [SerializeField]
+    AudioClip killenemy;
     
     NavMeshAgent Agent;
     
@@ -106,7 +110,7 @@ public class Enemy : MonoBehaviour
             case Enemy_tipe.Drone:
                 if (HP <= 0)
                 {
-
+                    Playkillsounds();
                     EG.Enemyspawn();
                     score.Plusscore(1);
                     Destroy(gameObject);
@@ -120,7 +124,7 @@ public class Enemy : MonoBehaviour
             case Enemy_tipe.Warrior:
                 if (HP <= 0)
                 {
-
+                    Playkillsounds();
                     EG.Enemyspawn();
                     score.Plusscore(1);
                     Destroy(gameObject);
@@ -194,5 +198,9 @@ public class Enemy : MonoBehaviour
             }
 
         }
+    }
+    public void Playkillsounds()
+    {
+        audiosource.PlayOneShot(killenemy);
     }
 }
