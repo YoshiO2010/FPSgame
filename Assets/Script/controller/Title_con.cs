@@ -13,8 +13,7 @@ public class Title_con : Base_comtroller
     float Camera_pos_rate=0; 
     int scroll_step = 1;
     public bool Shopping;
-    [SerializeField]
-    bool Open_Inventory;
+    
     protected override void Start()
     {
         base.Start();
@@ -32,21 +31,7 @@ public class Title_con : Base_comtroller
         base.Update();
        
         
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            Open_Inventory = !Open_Inventory;
-            status_UI.SetActive(Open_Inventory);
-            if (Optioning == true)
-            {
-                Time.timeScale = 0;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
-            //マウスカーソルが表示
-            Cursor.lockState = CursorLockMode.None;
-        }
+        
         if (Cursor.lockState == CursorLockMode.None && Input.GetMouseButtonDown(0))
         {
             
@@ -84,6 +69,6 @@ public class Title_con : Base_comtroller
         {
             base.open_option();
         }
-       
+
     }
 }

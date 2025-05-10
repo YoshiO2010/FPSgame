@@ -69,7 +69,8 @@ public class shooter : MonoBehaviour
     GameObject GunObject;
     [SerializeField]
     ShooterSE shooterSE;
-
+    [SerializeField]
+    Camera cam;
 
     void Start()
     {
@@ -129,7 +130,24 @@ public class shooter : MonoBehaviour
             if (ct_time >= ct && magazine > 0)
             {
                 shooterSE.PlaySE(Gun_Num);
+                if (MFPB != null)
+                {
+                    if (MF == null)
+                    {
+                        MF = Instantiate(MFPB, gundata[Gun_Num].startpoint);
+                        MF.transform.SetParent(gundata[Gun_Num].startpoint);
+                        MF.transform.localScale = gundata[Gun_Num].DG.MFsize;
+                    }
+                    else
+                    {
 
+                       
+
+                    }
+                    var PS=MF.GetComponent<ParticleSystem>();
+                    PS.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                    PS.Play();
+                }
                 for (float i = 0; i < gundata[Gun_Num].DG.pellet; i++)
                 {
                     
@@ -147,32 +165,15 @@ public class shooter : MonoBehaviour
                 ct_time = 0f;
                 magazine -= 1;
             }
-            if (MFPB != null)
-            {
-                if (MF != null)
-                {
-                    MF.SetActive(true);
-                }
-                else
-                {
-                   
-                    MF = Instantiate(MFPB, gundata[Gun_Num].startpoint);
-                    MF.transform.SetParent(gundata[Gun_Num].startpoint);
-                    MF.transform.localScale = gundata[Gun_Num].DG.MFsize;
-                }
-                MF.GetComponent<ParticleSystem>().Play();
-            }
+            
            
 
         }
         else
         {
             StartCoroutine(shooterSE.stopSE(Gun_Num));
-            if (MF != null)
-            {
-                //MF.SetActive(false);
-               // MF = null;
-            }
+            
+               
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -257,13 +258,14 @@ public class shooter : MonoBehaviour
         {
             gundata[Gun_Num].Gun_animator.SetTrigger("AIM");
             Ikact = true;
+            cam.fieldOfView = 75;
            
         }
         else if (Input.GetMouseButtonUp(1))
         {
             gundata[Gun_Num].Gun_animator.SetTrigger("BACK AIM");
             Ikact = false;
-           
+            cam.fieldOfView = 100;
         }
 
         /*if (Gun_Num == 0)
@@ -369,5 +371,9 @@ public class shooter : MonoBehaviour
             gundata[Gun_Num].Gun_animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
             gundata[Gun_Num].Gun_animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
         }
+    }
+    IEnumerator wait(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 }

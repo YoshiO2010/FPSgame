@@ -31,6 +31,8 @@ public class Base_comtroller : MonoBehaviour
     protected bool Optioning;
     [SerializeField]
     protected GameObject status_UI;
+    [SerializeField]
+    bool Open_Inventory;
     // Start is called before the first frame update
     protected virtual void Start()
     {       
@@ -56,7 +58,21 @@ public class Base_comtroller : MonoBehaviour
         {
             Cam_Controle();
         }
-
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Open_Inventory = !Open_Inventory;
+            status_UI.SetActive(Open_Inventory);
+            if (Optioning == true)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+            //マウスカーソルが表示
+            Cursor.lockState = CursorLockMode.None;
+        }
 
 
 
@@ -162,6 +178,7 @@ public class Base_comtroller : MonoBehaviour
         // ジャンプカウントのリセット
         jump_count = 0;
     }
+    
 }
 
 
