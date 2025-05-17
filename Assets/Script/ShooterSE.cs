@@ -10,6 +10,8 @@ public class ShooterSE : MonoBehaviour
     AudioClip[] GunshootSE;
     [SerializeField]
     float LastGunsound;
+    [SerializeField]
+    AudioClip reload_soud;
     
     // Start is called before the first frame update
     void Start()
@@ -41,5 +43,9 @@ public class ShooterSE : MonoBehaviour
             LastGunsound = 0;
         }
        
+    }
+    public void Play_reload()
+    {
+        audiosource.PlayOneShot(reload_soud);
     }
 }

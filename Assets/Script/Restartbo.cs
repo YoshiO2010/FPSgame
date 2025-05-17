@@ -29,4 +29,9 @@ public class Restartbo : MonoBehaviour
     {
         
     }
+    public void return_to_base()
+    {
+        GameObject.FindWithTag("GameController").GetComponent<Score>().resultMoney();
+        SceneManager.LoadScene("Title");
+    }
 }

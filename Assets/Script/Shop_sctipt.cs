@@ -28,6 +28,8 @@ public class Shop_sctipt : MonoBehaviour
     void Start()
     {
         money_num = PlayerPrefs.GetInt("MONEY", 500);
+        PlayerPrefs.SetInt("MONEY", money_num);
+        PlayerPrefs.Save();
         AR_statuspanel.SetActive(false);
         MLG_statuspanel.SetActive(false);
         SG_statuspanel.SetActive(false);

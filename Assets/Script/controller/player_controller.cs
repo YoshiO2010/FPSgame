@@ -38,8 +38,8 @@ public class player_controller : Base_comtroller
         Gameover_Flag = false;
         invincible = false;
         KB_Flag = false;
-       
-        Max_PlayerHP = PlayerPrefs.GetFloat("HP", 100);
+        Max_PlayerHP = 100;
+        Max_PlayerHP += PlayerPrefs.GetFloat("HP", 0);
         PlayerHP = Max_PlayerHP;
         reset = this.transform.position;
         Max_HPtext.text = Max_PlayerHP.ToString();
@@ -69,21 +69,7 @@ public class player_controller : Base_comtroller
             GameObject.FindWithTag("GameController").GetComponent<Score>().resultMoney();
             //GetComponent<player_controller>().enabled = false;
         }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                //マウスカーソルが表示
-                Cursor.lockState = CursorLockMode.None;
-            }
-
-            //マウスが通常の時に、かつマウスをクリックすると
-            if (Cursor.lockState == CursorLockMode.None && Input.GetMouseButtonDown(0)&&Gameover_Flag==false)
-            {
-                //マウスが消える
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-        }
+      
     }
     
 

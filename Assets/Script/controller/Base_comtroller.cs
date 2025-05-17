@@ -28,6 +28,7 @@ public class Base_comtroller : MonoBehaviour
     protected Animator Anime;
     [SerializeField]
     protected GameObject Option_UI;
+    [SerializeField]
     protected bool Optioning;
     [SerializeField]
     protected GameObject status_UI;
@@ -35,12 +36,17 @@ public class Base_comtroller : MonoBehaviour
     bool Open_Inventory;
     // Start is called before the first frame update
     protected virtual void Start()
-    {       
+    {
+        
         rb = GetComponent<Rigidbody>();
-        MAXjump_count = PlayerPrefs.GetInt("Max_jump", 2);
-        move_speed = PlayerPrefs.GetFloat("Speed", 6); 
+        MAXjump_count = 2;
+        MAXjump_count += PlayerPrefs.GetInt("Max_jump", 0);
+        move_speed = 6;
+        move_speed += PlayerPrefs.GetFloat("Speed", 0); 
         Cam_transfrom.rotation = Quaternion.identity;
         Anime = GetComponent<Animator>();
+        Optioning = false;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -50,7 +56,7 @@ public class Base_comtroller : MonoBehaviour
         
         Jump();
         
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             open_option();
         }

@@ -12,6 +12,7 @@ public class Title_con : Base_comtroller
     [SerializeField]
     float Camera_pos_rate=0; 
     int scroll_step = 1;
+    [SerializeField]
     public bool Shopping;
     
     protected override void Start()

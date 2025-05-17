@@ -20,9 +20,12 @@ public class Status_UI : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        HP = PlayerPrefs.GetFloat("HP",100);
-        Maxjunp_amount=PlayerPrefs.GetInt("Max_jump",2);
-        Speed=PlayerPrefs.GetFloat("Speed",6);
+        HP = 100;
+        HP += PlayerPrefs.GetFloat("HP",0);
+        Maxjunp_amount = 2;
+        Maxjunp_amount +=PlayerPrefs.GetInt("Max_jump",0);
+        Speed = 6;
+        Speed +=PlayerPrefs.GetFloat("Speed",0);
     }
 
     // Update is called once per frame

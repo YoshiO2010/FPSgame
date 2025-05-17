@@ -177,6 +177,8 @@ public class shooter : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            shooterSE.Play_reload();
+            
             for (int i = 0; relod_mada.Length > i; i++)
             {
                 relod_mada[i].gameObject.SetActive(true);
