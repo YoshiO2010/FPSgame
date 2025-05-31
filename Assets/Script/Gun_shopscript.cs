@@ -48,19 +48,25 @@ public class Gun_shopscript : MonoBehaviour
     public float relod_time_amount;
     public float take_time_amount;
     public int Damage_amount;
-   
+    [SerializeField]
+    public int Gun_rock;
+    
     [SerializeField]
     Gun_detaCreate gundata;
     public Gun_tipe ET;
     string tipe_name;
     int money_num;
-    
+    [SerializeField]
+    int Weapon_cost;
+    [SerializeField]
+    GameObject rock_panel;
+
     // Start is called before the first frame update
     void Start()
     {
         money_num = PlayerPrefs.GetInt("MONEY", 500);
 
-       
+        Gun_rock = PlayerPrefs.GetInt(tipe_name + "_rock", 0);
         Shootpower = gundata.Shootpower;
         ct = gundata.ct;
         Max_magazine = gundata.Max_magazine;
@@ -115,7 +121,10 @@ public class Gun_shopscript : MonoBehaviour
         Damage_text.text = Damage.ToString() + " (+" + Damage_amount*Damage_puls + ")";
         TextMeshProUGUI pellet_text = Pellet_num.GetComponent<TextMeshProUGUI>();
         pellet_text.text = pellet.ToString() + " (+" + pellet_puls + ")";
-        
+        if(Gun_rock==1)
+        {
+            rock_panel.SetActive(false);
+        }
     }
     public void Gun_status_Buy(string key_name)
     {
@@ -166,5 +175,18 @@ public class Gun_shopscript : MonoBehaviour
             PlayerPrefs.Save();
         }
        
+    }
+    public void Gun_unrock()
+    {
+        Gun_rock = PlayerPrefs.GetInt(tipe_name + "_rock", 0);
+        money_num = PlayerPrefs.GetInt("MONEY", 500);
+        if(Weapon_cost<=money_num)
+        {
+            Gun_rock = 1;
+            PlayerPrefs.SetInt(tipe_name + "_rock", Gun_rock);
+            money_num -= Weapon_cost;
+            PlayerPrefs.SetInt("MONEY", money_num);
+            PlayerPrefs.Save();
+        }
     }
 }

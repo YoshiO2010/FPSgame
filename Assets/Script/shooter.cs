@@ -71,9 +71,13 @@ public class shooter : MonoBehaviour
     ShooterSE shooterSE;
     [SerializeField]
     Camera cam;
+    int prev_gun_num;
+
 
     void Start()
     {
+        PlayerPrefs.SetInt("SMG_rock", 1);
+        PlayerPrefs.Save();
         switch (ET)
         {
             case Gun_tipe.AR:
@@ -293,14 +297,28 @@ public class shooter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            int check = 0;
             take = true;
             take_ct = Time.time + take_time;
-            Gun_Num++;
-            if (gundata.Length <= Gun_Num)
-            {
-                Gun_Num = 0;
-            }
-            tipe_name = gundata[Gun_Num].DG.name;
+            
+            do {
+                Gun_Num++;
+                check++;
+                if (gundata.Length <= Gun_Num)
+                {
+                    Gun_Num = 0;
+                }
+                tipe_name = gundata[Gun_Num].DG.name;
+                Debug.Log(tipe_name);
+
+                Debug.Log(tipe_name+ (PlayerPrefs.GetInt((string)tipe_name + "_rock", 0) != 1));
+                if (check >= gundata.Length)
+                {
+                    break;
+                }
+
+            } while (PlayerPrefs.GetInt((string)tipe_name + "_rock",0) != 1);
+            
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

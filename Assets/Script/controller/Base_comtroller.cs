@@ -56,7 +56,7 @@ public class Base_comtroller : MonoBehaviour
         
         Jump();
         
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             open_option();
         }
